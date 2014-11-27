@@ -1,26 +1,22 @@
-<script type="text/javascript">
-	RED.nodes.registerType('say',{
-		category: 'function',
-		color: '#0587C2',
-		defaults: {
-			name: {value:""}
-		},
-		inputs:1,
-		outputs:1,
-		icon: 'icon.png',
-		label: function() {
-			return this.name||'say';
-		}
-	});
-</script>
-
-<script type="text/x-red" data-template-name="say">
-    <div class="form-row">
-        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="File path">
-    </div>
-</script>
-
-<script type="text/x-red" data-help-name="say">
-    <p>A simple node that converts the message payloads into all say characters</p>
-</script>
+/**
+ * Node
+ *
+ * LICENSE:    MIT
+ *
+ * @project    node-red-node-say
+ * @package    NodeRedNode
+ * @author     André Lademann <andre@programmerq.eu>
+ * @copyright  Copyright (c) 2014 programmerq.eu (http://programmerq.eu)
+ * @license    http://programmerq.eu/license
+ * @since      2014-11-27 - 08:53:21 AM
+ */
+module.exports = function(RED) {
+	function sayNode(config) {
+		RED.nodes.createNode(this,config);
+		var node = this;
+		this.on('input', function(msg) {
+			node.send(msg);
+		});
+	}
+	RED.nodes.registerType('say',SayNode);
+};
