@@ -16,13 +16,18 @@
     "tts",
     "console"
   ],
+  "node-red": {
+    "nodes": {
+      "say": "say.js"
+    }
+  },
   "author": "André Lademann <andre@programmerqeu.de>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/programmerqeu/node-red-node-say/issues"
   },
   "homepage": "https://github.com/programmerqeu/node-red-node-say",
-  "devDependencies": {
+  "dependencies": {
     "say": "^0.6.0"
   }
 }
