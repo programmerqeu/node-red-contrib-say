@@ -10,13 +10,18 @@
  * @license    http://programmerq.eu/license
  * @since      2014-11-27 - 08:53:21 AM
  */
-module.exports = function(RED) {
-	function sayNode(config) {
-		RED.nodes.createNode(this,config);
+module.exports = function (RED) {
+	'use strict';
+
+	var exec = require('child_process').exec;
+
+	function SayNode(config) {
+		RED.nodes.createNode(this, config);
 		var node = this;
-		this.on('input', function(msg) {
+		this.on('input', function (msg) {
 			node.send(msg);
 		});
 	}
-	RED.nodes.registerType('say',SayNode);
+
+	RED.nodes.registerType('say', SayNode);
 };
