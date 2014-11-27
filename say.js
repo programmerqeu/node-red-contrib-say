@@ -13,13 +13,15 @@
 module.exports = function (RED) {
 	'use strict';
 
-	var exec = require('child_process').exec;
+	var say = require('say');
 
 	function SayNode(config) {
 		RED.nodes.createNode(this, config);
 		var node = this;
 		this.on('input', function (msg) {
-			node.send(msg);
+			say.speak(null, this.name || msg.payload , function() {
+				node.send(msg);
+			});
 		});
 	}
 
