@@ -15,6 +15,13 @@ module.exports = function (RED) {
 
 	var say = require('say');
 
+	/**
+	 * SayNode
+	 *
+	 * @param config
+	 * @constructor
+	 * @return void
+	 */
 	function SayNode(config) {
 		RED.nodes.createNode(this, config);
 		var node = this;
@@ -26,4 +33,23 @@ module.exports = function (RED) {
 	}
 
 	RED.nodes.registerType('say', SayNode);
+
+	/**
+	 * SayOutNode
+	 *
+	 * @param config
+	 * @constructor
+	 * @return void
+	 */
+	function SayOutNode(config) {
+		RED.nodes.createNode(this, config);
+		var node = this;
+		this.on('input', function (msg) {
+			say.speak(null, this.name || msg.payload , function() {
+				node.send(msg);
+			});
+		});
+	}
+
+	RED.nodes.registerType('say out', SayOutNode);
 };
