@@ -19,9 +19,14 @@ module.exports = function (RED) {
 		RED.nodes.createNode(this, config);
 		var node = this;
 		this.on('input', function (msg) {
-			say.speak(null, this.name || msg.payload , function() {
+			if(node.async) {
+				say.speak(null, this.name || msg.payload , function() {
+					node.send(msg);
+				});
+			} else {
+				say.speak(null, this.name || msg.payload);
 				node.send(msg);
-			});
+			}
 		});
 	}
 

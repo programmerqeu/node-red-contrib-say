@@ -1,7 +1,6 @@
 <script type="text/javascript">
 	RED.nodes.registerType('say', {
 		category: 'output',
-//		color: '#0587C2',
 		color: '#3FADB5',
 		defaults: {
 			name: {value: ""}
@@ -20,7 +19,12 @@
 <script type="text/x-red" data-template-name="say">
     <div class="form-row">
     		<label for="node-input-name"><i class="icon-edit"></i> Text</label>
-        <input type="text" id="node-input-name" placeholder="Text to speech (override payload)">
+        <input type="text" id="node-input-name" placeholder="Text to speech (override payload)"/>
+    </div>
+    <div class="form-row" id="node-once">
+        <label>&nbsp;</label>
+        <input type="checkbox" id="node-input-async" style="display: inline-block; width: auto; vertical-align: top;"/>
+        <label for="node-input-async" style="width: 70%;">Wait for the completion of the speech.</label>
     </div>
 </script>
 
