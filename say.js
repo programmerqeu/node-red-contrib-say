@@ -3,7 +3,7 @@
  *
  * LICENSE:    MIT
  *
- * @project    node-red-node-say
+ * @project    node-red-contrib-say
  * @package    NodeRedNode
  * @author     André Lademann <andre@programmerq.eu>
  * @copyright  Copyright (c) 2014 programmerq.eu (http://programmerq.eu)
