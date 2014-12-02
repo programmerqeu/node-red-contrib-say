@@ -3,7 +3,8 @@
 		category: 'output',
 		color: '#3FADB5',
 		defaults: {
-			name: {value: ""}
+			name: {value: ""},
+			async: {value: true}
 		},
 		inputs: 1,
 		outputs: 1,
@@ -32,15 +33,20 @@
 
 <script type="text/x-red" data-template-name="say">
 	<div class="form-row">
-		<label for="node-input-name"><i class="icon-edit"></i> Text</label>
-		<input type="text" id="node-input-name" placeholder="Text to speech (override payload)">
+			<label for="node-input-name"><i class="icon-edit"></i> Text</label>
+			<input type="text" id="node-input-name" placeholder="Text to speech (override payload)"/>
+	</div>
+	<div class="form-row" id="node-async">
+			<label>&nbsp;</label>
+			<input type="checkbox" id="node-input-async" style="display: inline-block; width: auto; vertical-align: top;"/>
+			<label for="node-input-async" style="width: 70%;">Wait for the completion of the speech.</label>
 	</div>
 </script>
 
 <script type="text/x-red" data-help-name="say">
-	<p>A simple node that converts the message payloads into speech</p>
-	<h3>Requirements</h3>
-	<p>Mac OS (comes with say) or Linux with eSpeak or Festival</p>
+    <p>A simple node that converts the message payloads into speech</p>
+    <h3>Requirements</h3>
+		<p>Mac OS (comes with say) or Linux with eSpeak or Festival</p>
 </script>
 
 <script type="text/x-red" data-template-name="say out">
