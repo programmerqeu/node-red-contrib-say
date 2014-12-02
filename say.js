@@ -25,9 +25,9 @@ module.exports = function (RED) {
 	function SayNode(config) {
 
 		RED.nodes.createNode(this, config);
-		this.once = config.once;
 		var node = this;
 		this.on('input', function (msg) {
+			console.log(node);
 			if(node.async) {
 				say.speak(null, this.name || msg.payload , function() {
 					node.send(msg);
