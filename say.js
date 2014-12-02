@@ -16,7 +16,9 @@ module.exports = function (RED) {
 	var say = require('say');
 
 	function SayNode(config) {
+
 		RED.nodes.createNode(this, config);
+		this.once = config.once;
 		var node = this;
 		this.on('input', function (msg) {
 			if(node.async) {
