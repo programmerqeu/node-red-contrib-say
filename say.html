@@ -12,7 +12,14 @@
 		icon: 'bridge-dash.png',
 		label: function () {
 			return this.name || 'say';
+		},
+		oneditprepare: function() {
+			$("#node-input-tts").change(function() {
+				$("#node-voice-espeak").show();
+				$("#node-input-row-voice-note").show();
+			});
 		}
+
 	});
 
 	RED.nodes.registerType('say out', {
@@ -32,21 +39,49 @@
 </script>
 
 <script type="text/x-red" data-template-name="say">
+
 	<div class="form-row">
 			<label for="node-input-name"><i class="icon-edit"></i> Text</label>
 			<input type="text" id="node-input-name" placeholder="Text to speech (override payload)"/>
 	</div>
+
 	<div class="form-row" id="node-async">
 			<label>&nbsp;</label>
 			<input type="checkbox" id="node-input-async" style="display: inline-block; width: auto; vertical-align: top;"/>
 			<label for="node-input-async" style="width: 70%;">Wait for the completion of the speech.</label>
 	</div>
+
+	<div class="form-row node-input-tts">
+		<label for="node-input-tts"><i class="fa fa-square"></i> TTS system</label>
+		<select id="node-input-tts" style="width:125px !important">
+			<option value="espeak">eSpeak</option>
+			<option value="festival">festival (Linux)</option>
+			<option value="say">say (OS X)</option>
+		</select>
+	</div>
+
+	<div class="form-row hidden" id="node-voice-espeak">
+		<label for="node-input-voice-espeak"><i class="fa fa-user"></i> TTS voice</label>
+		<select id="node-input-voice-espeak" style="width:125px !important">
+			<option value="dirk">Dirk</option>
+		</select>
+	</div>
+
+	<div id="node-input-row-voice-note" class="form-tips hidden">
+		<p>
+			<b>Note:</b> Make sure that you have installed your text to speaks (TTS)
+			program on the operating system where node-red is running.
+		</p>
+	</div>
+
 </script>
 
 <script type="text/x-red" data-help-name="say">
     <p>A simple node that converts the message payloads into speech</p>
     <h3>Requirements</h3>
 		<p>Mac OS (comes with say) or Linux with eSpeak or Festival</p>
+
+
 </script>
 
 <script type="text/x-red" data-template-name="say out">
@@ -54,10 +89,14 @@
 		<label for="node-input-name"><i class="icon-edit"></i> Text</label>
 		<input type="text" id="node-input-name" placeholder="Text to speech (override payload)">
 	</div>
+
+
 </script>
 
 <script type="text/x-red" data-help-name="say out">
 	<p>A simple node that converts the message payloads into speech</p>
 	<h3>Requirements</h3>
 	<p>Mac OS (comes with say) or Linux with eSpeak or Festival</p>
+
+
 </script>
