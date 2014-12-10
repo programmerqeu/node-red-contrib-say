@@ -1,4 +1,185 @@
 <script type="text/javascript">
+
+	var tts = {};
+
+	// OS X
+	tts.say = [
+		{
+			en_US: [
+				{
+					voice: 'Agnes',
+					description: 'Isn`t it nice to have a computer that will talk to you?'
+				},
+				{
+					voice: 'Albert',
+					description: 'I have a frog in my throat. No, I mean a real frog!'
+				},
+				{
+					voice: 'Alex',
+					description: 'Most people recognize me by my voice.'
+				},
+				{
+					voice: 'Bad News',
+					description: 'The light you see at the end of the tunnel is the headlamp of a fast approaching train.'
+				},
+				{
+					voice: 'Bahh',
+					description: 'Do not pull the wool over my eyes.'
+				},
+				{
+					voice: 'Bells',
+					description: 'Time flies when you are having fun.'
+				},
+				{
+					voice: 'Boing',
+					description: 'Spring has sprung, fall has fell, winter`s here and it`s colder than usual.'
+				},
+				{
+					voice: 'Bruce',
+					description: 'I sure like being inside this fancy computer.'
+				},
+				{
+					voice: 'Bubbles',
+					description: 'Pull the plug! I`m drowning!'
+				},
+				{
+					voice: 'Cellos',
+					description: 'Doo da doo da dum dee dee doodly doo dum dum dum doo da doo da doo da doo da doo da doo da doo.'
+				},
+				{
+					voice: 'Deranged',
+					description: 'I need to go on a really long vacation.'
+				},
+				{
+					voice: 'Fred',
+					description: 'I sure like being inside this fancy computer.'
+				},
+				{
+					voice: 'Good News',
+					description: 'Congratulations you just won the sweepstakes and you don`t have to pay income tax again.'
+				},
+				{
+					voice: 'Hysterical',
+					description: 'Please stop tickling me!'
+				},
+				{
+					voice: 'Junior',
+					description: 'My favorite food is pizza.'
+				},
+				{
+					voice: 'Kathy',
+					description: 'Isn`t it nice to have a computer that will talk to you?'
+				},
+				{
+					voice: 'Pipe Organ',
+					description: 'We must rejoice in this morbid voice.'
+				},
+				{
+					voice: 'Princess',
+					description: 'When I grow up I`m going to be a scientist.'
+				},
+				{
+					voice: 'Ralph',
+					description: 'The sum of the squares of the legs of a right triangle is equal to the square of the hypotenuse.'
+				},
+				{
+					voice: 'Samantha',
+					description: 'Hello, my name is Samantha. I am an American-English voice.'
+				},
+				{
+					voice: 'Trinoids',
+					description: 'We cannot communicate with these carbon units.'
+				},
+				{
+					voice: 'Vicki',
+					description: 'Isn`t it nice to have a computer that will talk to you?'
+				},
+				{
+					voice: 'Victoria',
+					description: 'Isn`t it nice to have a computer that will talk to you?'
+				},
+				{
+					voice: 'Whisper',
+					description: 'Pssssst, hey you, Yeah you, Who do ya think I`m talking to, the mouse?'
+				},
+				{
+					voice: 'Zarvox',
+					description: 'That looks like a peaceful planet.'
+				}
+			]
+		},
+
+		{
+			de_DE: [
+				{
+					voice: 'Anna',
+					description: 'Hallo, ich heiße Anna und ich bin eine deutsche Stimme.'
+				},
+				{
+					voice: 'Markus',
+					description: 'Hallo, ich heiße Markus und ich bin eine deutsche Stimme.'
+				},
+				{
+					voice: 'Petra',
+					description: 'Hallo, ich heiße Petra und ich bin eine deutsche Stimme.'
+				},
+				{
+					voice: 'Yannick',
+					description: 'Hallo, ich heiße Yannick und ich bin eine deutsche Stimme.'
+				}
+			]
+		},
+
+		{
+			es_ES: [
+				{
+					voice: 'Monica',
+					description: ' Hola, me llamo Monica y soy una voz española.'
+				}
+			]
+		},
+		{
+			fr_CA: [
+				{
+					voice: 'Amelie',
+					description: 'Bonjour, je m’appelle Amelie. Je suis une voix canadienne.'
+				}
+			]
+		},
+		{
+			it_IT: [
+				{
+					voice: 'Alice',
+					description: 'Isn`t it nice to have a computer that will talk to you?'
+				}
+			]
+		},
+		{
+			pl_PL: [
+				{
+					voice: 'Zosia',
+					description: 'Witaj. Mam na imię Zosia, jestem głosem kobiecym dla języka polskiego.'
+				}
+			]
+		},
+		{
+			sv_SE: [
+				{
+					voice: 'Alva',
+					description: 'Hej, jag heter Alva. Jag är en svensk röst.'
+				}
+			]
+		},
+		{
+			ru_RU: [
+				{
+					voice: 'Milena',
+					description: 'Здравствуйте, меня зовут Milena. Я – русский голос системы.'
+				}
+			]
+		}
+	];
+
 	RED.nodes.registerType('say', {
 		category: 'output',
 		color: '#3FADB5',
@@ -13,8 +194,8 @@
 		label: function () {
 			return this.name || 'say';
 		},
-		oneditprepare: function() {
-			$("#node-input-tts").change(function() {
+		oneditprepare: function () {
+			$("#node-input-tts").change(function () {
 				$("#node-voice-espeak").show();
 				$("#node-input-row-voice-note").show();
 			});
@@ -74,12 +255,28 @@
 		</p>
 	</div>
 
+
+
+
+
+
+
+
+
 </script>
 
 <script type="text/x-red" data-help-name="say">
     <p>A simple node that converts the message payloads into speech</p>
     <h3>Requirements</h3>
 		<p>Mac OS (comes with say) or Linux with eSpeak or Festival</p>
+
+
+
+
+
+
+
+
 
 
 </script>
@@ -91,12 +288,28 @@
 	</div>
 
 
+
+
+
+
+
+
+
+
 </script>
 
 <script type="text/x-red" data-help-name="say out">
 	<p>A simple node that converts the message payloads into speech</p>
 	<h3>Requirements</h3>
 	<p>Mac OS (comes with say) or Linux with eSpeak or Festival</p>
+
+
+
+
+
+
+
+
 
 
 </script>
