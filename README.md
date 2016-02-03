@@ -21,3 +21,5 @@ Run the following commando as root:
 ```
 npm install node-red-contrib-say -g
 ```
+ +[![Join the chat at https://gitter.im/programmerqeu/node-red-contrib-say](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/programmerqeu/node-red-contrib-say?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+ +
