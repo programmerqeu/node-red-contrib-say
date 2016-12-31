@@ -10,10 +10,10 @@ Let your computer speak the entered text.
 You should be lucky. All you need is preinstalled.
 
 ### Linux
-Linux support involves the use of [Festival](http://www.cstr.ed.ac.uk/projects/festival/), which uses decidedly less friendly names for its voices. 
+Linux support involves the use of [Festival](http://www.cstr.ed.ac.uk/projects/festival/), which uses decidedly less friendly names for its voices.
 
 ### Windows
-You may be sad, because currently there is no support for.
+It simply does a native shell call to PowerShell and it works fine for standard use.
 
 ## Install
 
