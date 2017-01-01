@@ -9,8 +9,7 @@
 [![Build Status](https://scrutinizer-ci.com/g/programmerqeu/node-red-contrib-say/badges/build.png?b=master)](https://scrutinizer-ci.com/g/programmerqeu/node-red-contrib-say/build-status/master)
 [![Join the chat at https://gitter.im/programmerqeu/node-red-contrib-say](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/programmerqeu/node-red-contrib-say?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[![NPM](https://nodei.co/npm/node-red-contrib-say.png)](https://nodei.co/npm/node-red-contrib-say/)
-
+[![NPM](https://nodei.co/npm/node-red-contrib-say.png?downloads=true)](https://nodei.co/npm/node-red-contrib-say/)
 
 ## Preparation
 
