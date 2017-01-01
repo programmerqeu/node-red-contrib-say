@@ -15,11 +15,24 @@ module.exports = function (RED) {
 
 	var say = require('say');
 
+	/**
+	 * Say node
+	 *
+	 * @property {*} config Configuration object
+	 * @return void
+	 **/
 	function SayNode(config) {
 		RED.nodes.createNode(this, config);
 		var node = this;
 		this.on('input', function (msg) {
-			say.speak(null, this.name || msg.payload , function() {
+			say.speak(
+				this.name || msg.payload,
+				this.voice,
+				1,
+				function(err) {
+					if (err) {
+				    return node.error(err);
+				  }
 				node.send(msg);
 			});
 		});

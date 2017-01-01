@@ -1,10 +1,10 @@
 <script type="text/javascript">
 	RED.nodes.registerType('say', {
 		category: 'output',
-//		color: '#0587C2',
 		color: '#3FADB5',
 		defaults: {
-			name: {value: ""}
+			name: {value: ''},
+			voice: {value: ''}
 		},
 		inputs: 1,
 		outputs: 1,
@@ -22,6 +22,31 @@
     		<label for="node-input-name"><i class="icon-edit"></i> Text</label>
         <input type="text" id="node-input-name" placeholder="Text to speech (override payload)">
     </div>
+		<div class="form-row">
+				<label for="node-input-voice"><i class="icon-user"></i> Voice</label>
+				<select type="text" id="node-input-voice" style="width: 320px">
+					<option value="" style="font-style: italic">Standard</option>
+
+					<optgroup label="Linux">
+						<option value="Alan">Alan - Scottish male</option>
+						<option value="Nick">Nick - English male</option>
+						<option value="Roger">Roger - English male</option>
+						<option value="Nina">Nina - English female</option>
+						<option value="KAL">KAL - American male</option>
+						<option value="SLT">SLT - American female</option>
+					</optgroup>
+
+					<optgroup label="macOS">
+						<option value="Alex">Alex</option>
+						<option value="Bruce">Bruce</option>
+						<option value="Fred">Fred</option>
+						<option value="Kathy">Kathy</option>
+						<option value="Vicki">Vicki</option>
+						<option value="Victoria">Victoria</option>
+					</optgroup>
+
+				</select>
+		</div>
 </script>
 
 <script type="text/x-red" data-help-name="say">
