@@ -8,6 +8,7 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/programmerqeu/node-red-contrib-say/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/programmerqeu/node-red-contrib-say/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/programmerqeu/node-red-contrib-say/badges/build.png?b=master)](https://scrutinizer-ci.com/g/programmerqeu/node-red-contrib-say/build-status/master)
 [![Join the chat at https://gitter.im/programmerqeu/node-red-contrib-say](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/programmerqeu/node-red-contrib-say?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![NSP Status](https://nodesecurity.io/orgs/programmerq/projects/d3a5e08c-ef9a-4f03-84a7-72e95cc0fd42/badge)](https://nodesecurity.io/orgs/programmerq/projects/d3a5e08c-ef9a-4f03-84a7-72e95cc0fd42)
 
 [![NPM](https://nodei.co/npm/node-red-contrib-say.png?downloads=true)](https://nodei.co/npm/node-red-contrib-say/)
 
