@@ -3,7 +3,6 @@
 > Node-RED output node for text-to-speech (TTS).  
 > Let your runtime speak messages from your flows.
 
-[![npm version](https://badge.fury.io/js/node-red-contrib-say.svg)](https://badge.fury.io/js/node-red-contrib-say)
 [![NPM](https://nodei.co/npm/node-red-contrib-say.png?downloads=true)](https://nodei.co/npm/node-red-contrib-say/)
 
 ## What this node does
