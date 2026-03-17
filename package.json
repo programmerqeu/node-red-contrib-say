@@ -6,7 +6,10 @@
   "main": "say.js",
   "scripts": {
     "test": "SAY_TEST_MODULE=test/mocks/say.js node --test test/say.test.js",
-    "test:run": "SAY_TEST_MODULE=test/mocks/say.js node --test test/say.test.js"
+    "test:run": "SAY_TEST_MODULE=test/mocks/say.js node --test test/say.test.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -31,5 +34,9 @@
   "homepage": "https://github.com/programmerqeu/node-red-contrib-say",
   "dependencies": {
     "say": "^0.16.0"
+  },
+  "devDependencies": {
+    "eslint": "^10.0.3",
+    "husky": "^9.1.7"
   }
 }
