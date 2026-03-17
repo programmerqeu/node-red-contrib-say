@@ -9,15 +9,22 @@ importers:
   .:
     dependencies:
       say:
-        specifier: ^0.11.0
-        version: 0.11.0
+        specifier: ^0.16.0
+        version: 0.16.0
 
 packages:
 
-  say@0.11.0:
-    resolution: {integrity: sha512-Q1BwcJtiOLl6b0jvom6w/ULGsBxyeEw7TW26b61mxdqG4ApB7wPlMuJoMWQioh1den5QQSj0ixNo0xkEJqnkNw==}
-    engines: {node: '>=0.10.0'}
+  one-time@0.0.4:
+    resolution: {integrity: sha512-qAMrwuk2xLEutlASoiPiAMW3EN3K96Ka/ilSXYr6qR1zSVXw2j7+yDSqGTC4T9apfLYxM3tLLjKvgPdAUK7kYQ==}
+
+  say@0.16.0:
+    resolution: {integrity: sha512-yEfncNu3I6lcZ6RIrXgE9DqbrEmvV5uQQ8ReM14u/DodlvJYpveqNphO55RLMSj77b06ZKNif/FLmhzQxcuUXg==}
+    engines: {node: '>=6.9'}
 
 snapshots:
 
-  say@0.11.0: {}
+  one-time@0.0.4: {}
+
+  say@0.16.0:
+    dependencies:
+      one-time: 0.0.4
