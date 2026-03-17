@@ -11,7 +11,7 @@ pnpm test
 Or with the env var set explicitly:
 
 ```bash
-SAY_TEST_MODULE=test/mocks/say.js node --test test/
+SAY_TEST_MODULE=test/mocks/say.js node --test test/say.test.js
 ```
 
 ## What is tested
