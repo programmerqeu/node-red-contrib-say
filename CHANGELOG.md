@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/programmerqeu/node-red-contrib-say/compare/node-red-contrib-say-v0.2.0...node-red-contrib-say-v0.2.1) (2026-03-17)
+
+
+### Bug Fixes
+
+* Revise CONTRIBUTING.md to streamline development instructions and enhance clarity on testing and linting processes ([14801ab](https://github.com/programmerqeu/node-red-contrib-say/commit/14801ab573bbc893a3c2afcf0dce8be0b0f7b8f0))
+
 ## [0.2.0](https://github.com/programmerqeu/node-red-contrib-say/compare/node-red-contrib-say-v0.1.1...node-red-contrib-say-v0.2.0) (2026-03-17)
 
 
