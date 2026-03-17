@@ -24,11 +24,14 @@ module.exports = function (RED) {
 	function SayNode(config) {
 		RED.nodes.createNode(this, config);
 		var node = this;
+
+		const voice = config.voice != ':' ? config.voice : config.voiceString
+
 		this.on('input', function (msg) {
 			say.speak(
-				this.name || msg.payload,
-				this.voice,
-				1,
+				config.text || config.name || msg.payload,
+				voice,
+				config.speed ? Number(config.speed) : 1,
 				function(err) {
 					if (err) {
 				    return node.error(err);

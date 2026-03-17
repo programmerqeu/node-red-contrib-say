@@ -4,49 +4,72 @@
 		color: '#3FADB5',
 		defaults: {
 			name: {value: ''},
-			voice: {value: ''}
+			text: {value: ''},
+			voice: {value: ''},
+			voiceString: {value: ''},
+			speed: {value: 1.0 }
 		},
 		inputs: 1,
 		outputs: 1,
 		align: 'right',
 		icon: 'bridge-dash.png',
 		label: function () {
-			return this.name || 'say';
-		}
+			return this.name || this.text || 'say';
+		},
+		oneditprepare: function() {
+          $("#node-input-voice").on("change", function(){
+            let option = $("#node-input-voice").val();
+            if(option == ":"){
+              $("#field-voiceString").show();
+            } else {
+              $("#field-voiceString").hide();
+            }
+          });
+        },
 	});
 
 </script>
 
 <script type="text/x-red" data-template-name="say">
     <div class="form-row">
-    		<label for="node-input-name"><i class="icon-edit"></i> Text</label>
-        <input type="text" id="node-input-name" placeholder="Text to speech (override payload)">
+    	<label for="node-input-name"><i class="icon-edit"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+	</div>
+	<div class="form-row">
+		<label for="node-input-text"><i class="icon-edit"></i> Text</label>
+		<input type="text" id="node-input-text" placeholder="Text to speech (override payload)">
     </div>
-		<div class="form-row">
-				<label for="node-input-voice"><i class="icon-user"></i> Voice</label>
-				<select type="text" id="node-input-voice" style="width: 320px">
-					<option value="" style="font-style: italic">Standard</option>
-
-					<optgroup label="Linux">
-						<option value="Alan">Alan - Scottish male</option>
-						<option value="Nick">Nick - English male</option>
-						<option value="Roger">Roger - English male</option>
-						<option value="Nina">Nina - English female</option>
-						<option value="KAL">KAL - American male</option>
-						<option value="SLT">SLT - American female</option>
-					</optgroup>
-
-					<optgroup label="macOS">
-						<option value="Alex">Alex</option>
-						<option value="Bruce">Bruce</option>
-						<option value="Fred">Fred</option>
-						<option value="Kathy">Kathy</option>
-						<option value="Vicki">Vicki</option>
-						<option value="Victoria">Victoria</option>
-					</optgroup>
-
-				</select>
-		</div>
+	<div class="form-row">
+			<label for="node-input-voice"><i class="icon-user"></i> Voice</label>
+			<select type="text" id="node-input-voice" style="width: 320px">
+				<option value="" style="font-style: italic">Standard</option>
+				<option value=":" style="font-style: italic">Specify voice by string</option>
+				<optgroup label="Linux">
+					<option value="Alan">Alan - Scottish male</option>
+					<option value="Nick">Nick - English male</option>
+					<option value="Roger">Roger - English male</option>
+					<option value="Nina">Nina - English female</option>
+					<option value="KAL">KAL - American male</option>
+					<option value="SLT">SLT - American female</option>
+				</optgroup>
+				<optgroup label="macOS">
+					<option value="Alex">Alex</option>
+					<option value="Bruce">Bruce</option>
+					<option value="Fred">Fred</option>
+					<option value="Kathy">Kathy</option>
+					<option value="Vicki">Vicki</option>
+					<option value="Victoria">Victoria</option>
+				</optgroup>
+			</select>
+	</div>
+	<div class="form-row" id="field-voiceString">
+		<label for="node-input-voiceString"><i class="icon-edit"></i> Voice Name</label>
+		<input type="text" id="node-input-voiceString" placeholder="Set voice/speaker">
+	</div>
+	<div class="form-row">
+		<label for="node-input-name"><i class="icon-edit"></i> Speed</label>
+		<input type="number" id="node-input-speed" min="0.1" max="2" step="0.1">
+	</div>
 </script>
 
 <script type="text/x-red" data-help-name="say">
