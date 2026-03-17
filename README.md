@@ -185,49 +185,9 @@ The node will now try to speak using the custom voice you configured.
 
 ---
 
-## Development
+## Contributing
 
-If you are developing this node locally:
-
-- Install dependencies with:
-
-  ```bash
-  pnpm install
-  ```
-
-- Run the unit tests (using Node’s built‑in test runner and a mocked `say` implementation):
-
-  ```bash
-  pnpm test
-  ```
-
-  See [`test/README.md`](test/README.md) for more details.
-
-> The tests do **not** trigger real audio. They use `SAY_TEST_MODULE` to inject a mock `say` module from `test/mocks/say.js`.
-
-### Linting
-
-- Lint the codebase with:
-
-  ```bash
-  pnpm lint
-  ```
-
-- Automatically fix simple issues where possible:
-
-  ```bash
-  pnpm lint:fix
-  ```
-
-### Git hooks
-
-This project uses Husky to enforce basic checks before each commit:
-
-- On every commit, the following run automatically:
-  - `pnpm lint`
-  - `pnpm test`
-
-If either command fails, the commit is aborted so you can fix issues first.
+Development setup, linting, and git hooks are described in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ---
 
@@ -236,4 +196,3 @@ If either command fails, the commit is aborted so you can fix issues first.
 - **License:** MIT – see [`LICENSE`](LICENSE).
 - **Based on:** [`say`](https://www.npmjs.com/package/say) by Marak – huge thanks for the original library.
 - **Built for:** [Node-RED](https://nodered.org/), an open-source flow-based programming tool for wiring together hardware devices, APIs and online services.
-
