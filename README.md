@@ -29,11 +29,11 @@ It simply does a native shell call to PowerShell and it works fine for standard 
 
 Switch to your Node-RED project directory and run the following command:
 
-```
+```bash
 pnpm add node-red-contrib-say
 ```
 
-## Thanks
+## Thanks to
 
 1. This node is based on [say.js](https://www.npmjs.com/package/say). Special thanks to Marak!
 2. [NodeRED](nodered.org) is the main tool for the internet of things. It is a open source project is invented and maintained bei IBM.
