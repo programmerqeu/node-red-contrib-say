@@ -1,13 +1,11 @@
 /**
  * Unit tests for the Say node (node-red-contrib-say).
  * Uses SAY_TEST_MODULE to inject test/mocks/say.js so no real TTS runs.
- * Run: SAY_TEST_MODULE=test/mocks/say.js node --test test/say.test.js
- * Or: pnpm test (script sets the env)
+ * Run: pnpm test (or SAY_TEST_MODULE=test/mocks/say.js node --test test/say.test.js)
  */
 const path = require('path');
-if (!process.env.SAY_TEST_MODULE) {
-	process.env.SAY_TEST_MODULE = path.join(__dirname, 'mocks', 'say.js');
-}
+// Set before any require of say.js so the main module loads the mock
+process.env.SAY_TEST_MODULE = process.env.SAY_TEST_MODULE || path.join(__dirname, 'mocks', 'say.js');
 
 const { describe, it, beforeEach } = require('node:test');
 const assert = require('node:assert');
