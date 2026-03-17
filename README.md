@@ -27,7 +27,7 @@ It simply does a native shell call to PowerShell and it works fine for standard 
 
 Switch to your Node-RED project directory and run the following command:
 ```
-npm install node-red-contrib-say
+pnpm add node-red-contrib-say
 ```
 
 ## Thanks
