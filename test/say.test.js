@@ -53,7 +53,7 @@ describe('Say node', { concurrency: 1 }, () => {
 			_lastSent: null,
 			_inputHandler: null,
 		};
-		new SayNodeConstructor(config);
+		SayNodeConstructor.call(node, config);
 		return node;
 	}
 
@@ -66,7 +66,7 @@ describe('Say node', { concurrency: 1 }, () => {
 		it('calls RED.nodes.createNode with config when constructed', () => {
 			const createNodeCalls = mockRED.nodes._createNodeCalls;
 			createNodeCalls.length = 0;
-			new SayNodeConstructor({ text: 'hi', name: 'TestNode' });
+			createNode({ text: 'hi', name: 'TestNode' });
 			assert.ok(createNodeCalls.length >= 1);
 			const lastCall = createNodeCalls[createNodeCalls.length - 1];
 			assert.strictEqual(lastCall.config.text, 'hi');

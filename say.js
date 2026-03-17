@@ -13,8 +13,8 @@
 module.exports = function (RED) {
 	'use strict';
 
-	var path = require('path');
-	var say = process.env.SAY_TEST_MODULE
+	const path = require('path');
+	const say = process.env.SAY_TEST_MODULE
 		? require(path.resolve(__dirname, process.env.SAY_TEST_MODULE))
 		: require('say');
 
@@ -26,20 +26,20 @@ module.exports = function (RED) {
 	 **/
 	function SayNode(config) {
 		RED.nodes.createNode(this, config);
-		var node = this;
+		const node = this;
 
-		const voice = config.voice != ':' ? config.voice : config.voiceString
+		const voice = config.voice !== ':' ? config.voice : config.voiceString;
 
 		this.on('input', function (msg) {
 			say.speak(
 				config.text || config.name || msg.payload,
 				voice,
 				config.speed ? Number(config.speed) : 1,
-				function(err) {
+				function (err) {
 					if (err) {
-				    return node.error(err);
-				  }
-				node.send(msg);
+						return node.error(err);
+					}
+					node.send(msg);
 			});
 		});
 	}
