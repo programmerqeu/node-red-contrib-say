@@ -5,7 +5,8 @@
   "packageManager": "pnpm@9",
   "main": "say.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "SAY_TEST_MODULE=test/mocks/say.js node --test test/",
+    "test:run": "SAY_TEST_MODULE=test/mocks/say.js node --test test/"
   },
   "repository": {
     "type": "git",

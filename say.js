@@ -13,7 +13,10 @@
 module.exports = function (RED) {
 	'use strict';
 
-	var say = require('say');
+	var path = require('path');
+	var say = process.env.SAY_TEST_MODULE
+		? require(path.resolve(__dirname, process.env.SAY_TEST_MODULE))
+		: require('say');
 
 	/**
 	 * Say node
