@@ -29,7 +29,7 @@ module.exports = function (RED) {
 
 		this.on('input', function (msg) {
 			say.speak(
-				config.text || msg.payload,
+				config.text || config.name || msg.payload,
 				voice,
 				config.speed ? Number(config.speed) : 1,
 				function(err) {
