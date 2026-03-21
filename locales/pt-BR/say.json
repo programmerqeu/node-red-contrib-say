@@ -1,0 +1,31 @@
+{
+  "say": {
+    "paletteLabel": "say",
+    "label": {
+      "name": "Nome",
+      "text": "Texto",
+      "voice": "Voz",
+      "voiceName": "Nome da voz",
+      "speed": "Velocidade"
+    },
+    "placeholder": {
+      "name": "Nome",
+      "text": "Texto para fala (substitui o payload)",
+      "voiceName": "Voz ou locutor"
+    },
+    "voice": {
+      "standard": "Padrão",
+      "byString": "Especificar voz por texto",
+      "alan": "Alan — escocês, masculino",
+      "nick": "Nick — inglês, masculino",
+      "roger": "Roger — inglês, masculino",
+      "nina": "Nina — inglês, feminino",
+      "kal": "KAL — inglês americano, masculino",
+      "slt": "SLT — inglês americano, feminino"
+    },
+    "optgroup": {
+      "linux": "Linux",
+      "macos": "macOS"
+    }
+  }
+}

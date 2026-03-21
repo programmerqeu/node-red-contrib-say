@@ -1,0 +1,31 @@
+{
+  "say": {
+    "paletteLabel": "say",
+    "label": {
+      "name": "이름",
+      "text": "텍스트",
+      "voice": "음성",
+      "voiceName": "음성 이름",
+      "speed": "속도"
+    },
+    "placeholder": {
+      "name": "이름",
+      "text": "음성으로 읽을 텍스트(페이로드 덮어쓰기)",
+      "voiceName": "음성 또는 화자"
+    },
+    "voice": {
+      "standard": "기본",
+      "byString": "문자열로 음성 지정",
+      "alan": "Alan — 스코틀랜드 영어, 남성",
+      "nick": "Nick — 영어, 남성",
+      "roger": "Roger — 영어, 남성",
+      "nina": "Nina — 영어, 여성",
+      "kal": "KAL — 미국 영어, 남성",
+      "slt": "SLT — 미국 영어, 여성"
+    },
+    "optgroup": {
+      "linux": "Linux",
+      "macos": "macOS"
+    }
+  }
+}

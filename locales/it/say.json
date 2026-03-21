@@ -1,0 +1,31 @@
+{
+  "say": {
+    "paletteLabel": "say",
+    "label": {
+      "name": "Nome",
+      "text": "Testo",
+      "voice": "Voce",
+      "voiceName": "Nome voce",
+      "speed": "Velocità"
+    },
+    "placeholder": {
+      "name": "Nome",
+      "text": "Testo da sintetizzare (sovrascrive il payload)",
+      "voiceName": "Voce o parlante"
+    },
+    "voice": {
+      "standard": "Predefinita",
+      "byString": "Specifica la voce come testo",
+      "alan": "Alan — scozzese, maschile",
+      "nick": "Nick — inglese, maschile",
+      "roger": "Roger — inglese, maschile",
+      "nina": "Nina — inglese, femminile",
+      "kal": "KAL — inglese americano, maschile",
+      "slt": "SLT — inglese americano, femminile"
+    },
+    "optgroup": {
+      "linux": "Linux",
+      "macos": "macOS"
+    }
+  }
+}

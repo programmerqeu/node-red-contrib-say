@@ -1,5 +1,9 @@
 # Contributing
 
+## Translations
+
+This document is available in: [English](CONTRIBUTING.en.md) · [Español](CONTRIBUTING.es.md) · [Français](CONTRIBUTING.fr.md) · [Deutsch](CONTRIBUTING.de.md) · [Português](CONTRIBUTING.pt.md) · [Italiano](CONTRIBUTING.it.md) · [Nederlands](CONTRIBUTING.nl.md) · [Polski](CONTRIBUTING.pl.md) · [Türkçe](CONTRIBUTING.tr.md) · [Bahasa Indonesia](CONTRIBUTING.id.md).
+
 Thanks for your interest in contributing to `node-red-contrib-say`. This document describes how to set up and work on the project locally.
 
 ## Development

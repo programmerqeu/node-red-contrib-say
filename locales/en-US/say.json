@@ -1,0 +1,31 @@
+{
+  "say": {
+    "paletteLabel": "say",
+    "label": {
+      "name": "Name",
+      "text": "Text",
+      "voice": "Voice",
+      "voiceName": "Voice Name",
+      "speed": "Speed"
+    },
+    "placeholder": {
+      "name": "Name",
+      "text": "Text to speech (override payload)",
+      "voiceName": "Set voice/speaker"
+    },
+    "voice": {
+      "standard": "Standard",
+      "byString": "Specify voice by string",
+      "alan": "Alan — Scottish male",
+      "nick": "Nick — English male",
+      "roger": "Roger — English male",
+      "nina": "Nina — English female",
+      "kal": "KAL — American male",
+      "slt": "SLT — American female"
+    },
+    "optgroup": {
+      "linux": "Linux",
+      "macos": "macOS"
+    }
+  }
+}

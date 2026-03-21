@@ -1,0 +1,31 @@
+{
+  "say": {
+    "paletteLabel": "say",
+    "label": {
+      "name": "名称",
+      "text": "文本",
+      "voice": "语音",
+      "voiceName": "语音名称",
+      "speed": "语速"
+    },
+    "placeholder": {
+      "name": "名称",
+      "text": "要朗读的文本（覆盖载荷）",
+      "voiceName": "语音或说话人"
+    },
+    "voice": {
+      "standard": "默认",
+      "byString": "用字符串指定语音",
+      "alan": "Alan — 苏格兰英语，男声",
+      "nick": "Nick — 英语，男声",
+      "roger": "Roger — 英语，男声",
+      "nina": "Nina — 英语，女声",
+      "kal": "KAL — 美式英语，男声",
+      "slt": "SLT — 美式英语，女声"
+    },
+    "optgroup": {
+      "linux": "Linux",
+      "macos": "macOS"
+    }
+  }
+}

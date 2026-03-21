@@ -1,5 +1,9 @@
 # Tests for node-red-contrib-say
 
+## Translations
+
+This document is available in: [English](README.en.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md) · [Português](README.pt.md) · [Italiano](README.it.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Türkçe](README.tr.md) · [Bahasa Indonesia](README.id.md).
+
 Unit tests for the Say node using Node.js built-in test runner. The real `say` (TTS) package is replaced by a mock when `SAY_TEST_MODULE` is set so tests run without audio.
 
 ## Run tests

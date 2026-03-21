@@ -14,7 +14,7 @@
 		align: 'right',
 		icon: 'bridge-dash.png',
 		label: function () {
-			return this.name || this.text || 'say';
+			return this.name || this.text || this._('paletteLabel');
 		},
 		oneditprepare: function() {
           $("#node-input-voice").on("change", function(){
@@ -25,6 +25,7 @@
               $("#field-voiceString").hide();
             }
           });
+          $("#node-input-voice").trigger("change");
         },
 	});
 
@@ -32,27 +33,27 @@
 
 <script type="text/x-red" data-template-name="say">
     <div class="form-row">
-    	<label for="node-input-name"><i class="icon-edit"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="Name">
+    	<label for="node-input-name"><i class="icon-edit"></i> <span data-i18n="say.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]say.placeholder.name">
 	</div>
 	<div class="form-row">
-		<label for="node-input-text"><i class="icon-edit"></i> Text</label>
-		<input type="text" id="node-input-text" placeholder="Text to speech (override payload)">
+		<label for="node-input-text"><i class="icon-edit"></i> <span data-i18n="say.label.text"></span></label>
+		<input type="text" id="node-input-text" data-i18n="[placeholder]say.placeholder.text">
     </div>
 	<div class="form-row">
-			<label for="node-input-voice"><i class="icon-user"></i> Voice</label>
+			<label for="node-input-voice"><i class="icon-user"></i> <span data-i18n="say.label.voice"></span></label>
 			<select type="text" id="node-input-voice" style="width: 320px">
-				<option value="" style="font-style: italic">Standard</option>
-				<option value=":" style="font-style: italic">Specify voice by string</option>
-				<optgroup label="Linux">
-					<option value="Alan">Alan - Scottish male</option>
-					<option value="Nick">Nick - English male</option>
-					<option value="Roger">Roger - English male</option>
-					<option value="Nina">Nina - English female</option>
-					<option value="KAL">KAL - American male</option>
-					<option value="SLT">SLT - American female</option>
+				<option value="" style="font-style: italic" data-i18n="say.voice.standard"></option>
+				<option value=":" style="font-style: italic" data-i18n="say.voice.byString"></option>
+				<optgroup label="Linux" data-i18n="[label]say.optgroup.linux">
+					<option value="Alan" data-i18n="say.voice.alan"></option>
+					<option value="Nick" data-i18n="say.voice.nick"></option>
+					<option value="Roger" data-i18n="say.voice.roger"></option>
+					<option value="Nina" data-i18n="say.voice.nina"></option>
+					<option value="KAL" data-i18n="say.voice.kal"></option>
+					<option value="SLT" data-i18n="say.voice.slt"></option>
 				</optgroup>
-				<optgroup label="macOS">
+				<optgroup label="macOS" data-i18n="[label]say.optgroup.macos">
 					<option value="Alex">Alex</option>
 					<option value="Bruce">Bruce</option>
 					<option value="Fred">Fred</option>
@@ -63,11 +64,11 @@
 			</select>
 	</div>
 	<div class="form-row" id="field-voiceString">
-		<label for="node-input-voiceString"><i class="icon-edit"></i> Voice Name</label>
-		<input type="text" id="node-input-voiceString" placeholder="Set voice/speaker">
+		<label for="node-input-voiceString"><i class="icon-edit"></i> <span data-i18n="say.label.voiceName"></span></label>
+		<input type="text" id="node-input-voiceString" data-i18n="[placeholder]say.placeholder.voiceName">
 	</div>
 	<div class="form-row">
-		<label for="node-input-name"><i class="icon-edit"></i> Speed</label>
+		<label for="node-input-speed"><i class="icon-edit"></i> <span data-i18n="say.label.speed"></span></label>
 		<input type="number" id="node-input-speed" min="0.1" max="2" step="0.1">
 	</div>
 </script>

@@ -1,0 +1,31 @@
+{
+  "say": {
+    "paletteLabel": "say",
+    "label": {
+      "name": "名前",
+      "text": "テキスト",
+      "voice": "音声",
+      "voiceName": "音声名",
+      "speed": "速度"
+    },
+    "placeholder": {
+      "name": "名前",
+      "text": "読み上げテキスト（ペイロードを上書き）",
+      "voiceName": "音声または話者"
+    },
+    "voice": {
+      "standard": "既定",
+      "byString": "文字列で音声を指定",
+      "alan": "Alan — スコットランド英語、男性",
+      "nick": "Nick — 英語、男性",
+      "roger": "Roger — 英語、男性",
+      "nina": "Nina — 英語、女性",
+      "kal": "KAL — 米英語、男性",
+      "slt": "SLT — 米英語、女性"
+    },
+    "optgroup": {
+      "linux": "Linux",
+      "macos": "macOS"
+    }
+  }
+}
