@@ -89,6 +89,17 @@ pnpm add node-red-contrib-say
 
 Then restart Node-RED so the new node is loaded.
 
+### Example flows
+
+This package ships **importable flows** under [`examples/`](examples/) (see [Node-RED: packaging examples](https://nodered.org/docs/creating-nodes/examples)):
+
+| File | What it shows |
+| --- | --- |
+| [`examples/01-say-fixed-text.json`](examples/01-say-fixed-text.json) | **Inject → say → debug** — text comes from the node **Text** field. |
+| [`examples/02-say-from-payload.json`](examples/02-say-from-payload.json) | **Inject → say → debug** — **Text** empty; spoken string is `msg.payload`. |
+
+To import: **Menu → Import → select a JSON file** (or paste the file contents), then **Deploy**. Ensure your runtime has a working TTS setup (see [Requirements](#requirements)).
+
 ---
 
 ## Using the `say` node

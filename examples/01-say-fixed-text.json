@@ -1,0 +1,55 @@
+[
+  {
+    "id": "say-example-tab-fixed",
+    "type": "tab",
+    "label": "Say — fixed text",
+    "disabled": false,
+    "info": "Inject triggers the say node. The spoken text comes from the node configuration (Text field), not from the message payload."
+  },
+  {
+    "id": "say-example-inject-fixed",
+    "type": "inject",
+    "z": "say-example-tab-fixed",
+    "name": "Trigger",
+    "props": [{ "p": "payload" }],
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "topic": "",
+    "payload": "go",
+    "payloadType": "str",
+    "x": 150,
+    "y": 160,
+    "wires": [["say-example-node-fixed"]]
+  },
+  {
+    "id": "say-example-node-fixed",
+    "type": "say",
+    "z": "say-example-tab-fixed",
+    "name": "",
+    "text": "Hello from the say node example flow.",
+    "voice": "",
+    "voiceString": "",
+    "speed": 1,
+    "x": 380,
+    "y": 160,
+    "wires": [["say-example-debug-fixed"]]
+  },
+  {
+    "id": "say-example-debug-fixed",
+    "type": "debug",
+    "z": "say-example-tab-fixed",
+    "name": "After speak",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "true",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 610,
+    "y": 160,
+    "wires": []
+  }
+]

@@ -1,0 +1,55 @@
+[
+  {
+    "id": "say-example-tab-payload",
+    "type": "tab",
+    "label": "Say — text from payload",
+    "disabled": false,
+    "info": "When Text and Name are empty, the say node speaks msg.payload. Useful for dynamic announcements."
+  },
+  {
+    "id": "say-example-inject-payload",
+    "type": "inject",
+    "z": "say-example-tab-payload",
+    "name": "Speak payload",
+    "props": [{ "p": "payload" }],
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "topic": "",
+    "payload": "Temperature is twenty one degrees.",
+    "payloadType": "str",
+    "x": 170,
+    "y": 160,
+    "wires": [["say-example-node-payload"]]
+  },
+  {
+    "id": "say-example-node-payload",
+    "type": "say",
+    "z": "say-example-tab-payload",
+    "name": "Dynamic TTS",
+    "text": "",
+    "voice": "",
+    "voiceString": "",
+    "speed": 1,
+    "x": 420,
+    "y": 160,
+    "wires": [["say-example-debug-payload"]]
+  },
+  {
+    "id": "say-example-debug-payload",
+    "type": "debug",
+    "z": "say-example-tab-payload",
+    "name": "After speak",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "true",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 650,
+    "y": 160,
+    "wires": []
+  }
+]
