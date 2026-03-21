@@ -17,6 +17,7 @@
 			return this.name || this.text || this._('say.paletteLabel');
 		},
 		oneditprepare: function() {
+          const languageStorageKey = "node-red-contrib-say.languageFilter";
           const normalizePlatform = function(platform) {
             if (!platform || typeof platform !== "string") {
               return undefined;
@@ -53,39 +54,117 @@
             return undefined;
           };
 
-          const applyVoicePresetFilter = function(runtimePlatform) {
+          const getPreferredLanguage = function() {
+            try {
+              return localStorage.getItem(languageStorageKey) || "__all__";
+            } catch (_error) {
+              return "__all__";
+            }
+          };
+
+          const savePreferredLanguage = function(language) {
+            try {
+              localStorage.setItem(languageStorageKey, language || "__all__");
+            } catch (_error) { }
+          };
+
+          const applyVoicePresetFilter = function(runtimePlatform, languageFilter) {
             const $voiceSelect = $("#node-input-voice");
-            const $groups = $voiceSelect.find("optgroup[data-platform]");
+            const $platformGroups = $voiceSelect.find("optgroup[data-platform]");
+            const $voiceOptions = $voiceSelect.find("optgroup[data-platform] option");
+            const selectedValue = $voiceSelect.val();
+            const normalizedLanguage = languageFilter || "__all__";
 
             if (!runtimePlatform) {
-              $groups.show();
-              return;
+              $platformGroups.show();
+            } else {
+              $platformGroups.each(function() {
+                const $group = $(this);
+                const isMatch = $group.data("platform") === runtimePlatform;
+                $group.toggle(isMatch);
+              });
             }
 
-            $groups.each(function() {
-              const $group = $(this);
-              const isMatch = $group.data("platform") === runtimePlatform;
-              $group.toggle(isMatch);
+            $voiceOptions.each(function() {
+              const $option = $(this);
+              const optionLang = $option.data("lang");
+              let visible = true;
+              if (normalizedLanguage !== "__all__" && optionLang) {
+                visible = optionLang === normalizedLanguage;
+              }
+              $option.toggle(visible);
             });
 
-            // Keep an already-selected custom preset visible for backwards compatibility.
-            const selectedValue = $voiceSelect.val();
+            $platformGroups.each(function() {
+              const $group = $(this);
+              if ($group.css("display") === "none") {
+                return;
+              }
+              const hasVisibleOptions = $group.find("option:visible").length > 0;
+              $group.toggle(hasVisibleOptions);
+            });
+
+            // Keep an already-selected preset visible for backwards compatibility.
             const $selectedOption = $voiceSelect.find('option[value="' + selectedValue + '"]');
             if ($selectedOption.length > 0) {
+              $selectedOption.show();
               $selectedOption.closest("optgroup[data-platform]").show();
             }
           };
 
-          const settingsPlatform = detectRuntimePlatform();
-          applyVoicePresetFilter(settingsPlatform);
+          const collectLanguages = function() {
+            const seen = {};
+            const values = [];
+            $("#node-input-voice").find("option[data-lang]").each(function() {
+              const language = $(this).data("lang");
+              if (language && !seen[language]) {
+                seen[language] = true;
+                values.push(language);
+              }
+            });
+            values.sort();
+            return values;
+          };
+
+          const populateLanguageFilter = function(defaultLanguage) {
+            const $languageSelect = $("#node-input-languageFilter");
+            const languages = collectLanguages();
+            $languageSelect.empty();
+            $languageSelect.append(
+              $('<option value="__all__" data-i18n="say.language.all"></option>')
+            );
+            languages.forEach(function(language) {
+              $languageSelect.append(
+                $('<option></option>').attr("value", language).text(language)
+              );
+            });
+            if (languages.includes(defaultLanguage)) {
+              $languageSelect.val(defaultLanguage);
+            } else {
+              $languageSelect.val("__all__");
+            }
+            RED.i18n.update($languageSelect);
+          };
+
+          let currentRuntimePlatform = detectRuntimePlatform();
+          const preferredLanguage = getPreferredLanguage();
+          populateLanguageFilter(preferredLanguage);
+          applyVoicePresetFilter(currentRuntimePlatform, preferredLanguage);
 
           $.getJSON("say/platform")
             .done(function(response) {
               const apiPlatform = normalizePlatform(response && response.platform);
               if (apiPlatform) {
-                applyVoicePresetFilter(apiPlatform);
+                currentRuntimePlatform = apiPlatform;
+                applyVoicePresetFilter(currentRuntimePlatform, $("#node-input-languageFilter").val());
               }
             });
+
+          $("#node-input-languageFilter").on("change", function() {
+            const language = $("#node-input-languageFilter").val();
+            savePreferredLanguage(language);
+            applyVoicePresetFilter(currentRuntimePlatform, language);
+          });
 
           $("#node-input-voice").on("change", function(){
             let option = $("#node-input-voice").val();
@@ -111,25 +190,92 @@
 		<input type="text" id="node-input-text" data-i18n="[placeholder]say.placeholder.text">
     </div>
 	<div class="form-row">
+		<label for="node-input-languageFilter"><i class="icon-tag"></i> <span data-i18n="say.label.language"></span></label>
+		<select type="text" id="node-input-languageFilter" style="width: 320px">
+			<option value="__all__" data-i18n="say.language.all"></option>
+		</select>
+	</div>
+	<div class="form-row">
 			<label for="node-input-voice"><i class="icon-user"></i> <span data-i18n="say.label.voice"></span></label>
 			<select type="text" id="node-input-voice" style="width: 320px">
 				<option value="" style="font-style: italic" data-i18n="say.voice.standard"></option>
 				<option value=":" style="font-style: italic" data-i18n="say.voice.byString"></option>
 				<optgroup label="Linux" data-i18n="[label]say.optgroup.linux" data-platform="linux">
-					<option value="Alan" data-i18n="say.voice.alan"></option>
-					<option value="Nick" data-i18n="say.voice.nick"></option>
-					<option value="Roger" data-i18n="say.voice.roger"></option>
-					<option value="Nina" data-i18n="say.voice.nina"></option>
-					<option value="KAL" data-i18n="say.voice.kal"></option>
-					<option value="SLT" data-i18n="say.voice.slt"></option>
+					<option value="Alan" data-lang="en_US" data-i18n="say.voice.alan"></option>
+					<option value="Nick" data-lang="en_US" data-i18n="say.voice.nick"></option>
+					<option value="Roger" data-lang="en_US" data-i18n="say.voice.roger"></option>
+					<option value="Nina" data-lang="en_US" data-i18n="say.voice.nina"></option>
+					<option value="KAL" data-lang="en_US" data-i18n="say.voice.kal"></option>
+					<option value="SLT" data-lang="en_US" data-i18n="say.voice.slt"></option>
 				</optgroup>
 				<optgroup label="macOS" data-i18n="[label]say.optgroup.macos" data-platform="darwin">
-					<option value="Alex">Alex</option>
-					<option value="Bruce">Bruce</option>
-					<option value="Fred">Fred</option>
-					<option value="Kathy">Kathy</option>
-					<option value="Vicki">Vicki</option>
-					<option value="Victoria">Victoria</option>
+					<option value="Agnes" data-lang="en_US">Agnes</option>
+					<option value="Albert" data-lang="en_US">Albert</option>
+					<option value="Alex" data-lang="en_US">Alex</option>
+					<option value="Alice" data-lang="it_IT">Alice</option>
+					<option value="Alva" data-lang="sv_SE">Alva</option>
+					<option value="Amelie" data-lang="fr_CA">Amelie</option>
+					<option value="Anna" data-lang="de_DE">Anna</option>
+					<option value="Bad News" data-lang="en_US">Bad News</option>
+					<option value="Bahh" data-lang="en_US">Bahh</option>
+					<option value="Bells" data-lang="en_US">Bells</option>
+					<option value="Boing" data-lang="en_US">Boing</option>
+					<option value="Bruce" data-lang="en_US">Bruce</option>
+					<option value="Bubbles" data-lang="en_US">Bubbles</option>
+					<option value="Carmit" data-lang="he_IL">Carmit</option>
+					<option value="Cellos" data-lang="en_US">Cellos</option>
+					<option value="Damayanti" data-lang="id_ID">Damayanti</option>
+					<option value="Daniel" data-lang="en_GB">Daniel</option>
+					<option value="Deranged" data-lang="en_US">Deranged</option>
+					<option value="Diego" data-lang="es_AR">Diego</option>
+					<option value="Ellen" data-lang="nl_BE">Ellen</option>
+					<option value="Fiona" data-lang="en-scotland">Fiona</option>
+					<option value="Fred" data-lang="en_US">Fred</option>
+					<option value="Good News" data-lang="en_US">Good News</option>
+					<option value="Hysterical" data-lang="en_US">Hysterical</option>
+					<option value="Ioana" data-lang="ro_RO">Ioana</option>
+					<option value="Joana" data-lang="pt_PT">Joana</option>
+					<option value="Junior" data-lang="en_US">Junior</option>
+					<option value="Kanya" data-lang="th_TH">Kanya</option>
+					<option value="Karen" data-lang="en_AU">Karen</option>
+					<option value="Kathy" data-lang="en_US">Kathy</option>
+					<option value="Kyoko" data-lang="ja_JP">Kyoko</option>
+					<option value="Laura" data-lang="sk_SK">Laura</option>
+					<option value="Lekha" data-lang="hi_IN">Lekha</option>
+					<option value="Luciana" data-lang="pt_BR">Luciana</option>
+					<option value="Mariska" data-lang="hu_HU">Mariska</option>
+					<option value="Markus" data-lang="de_DE">Markus</option>
+					<option value="Mei-Jia" data-lang="zh_TW">Mei-Jia</option>
+					<option value="Melina" data-lang="el_GR">Melina</option>
+					<option value="Milena" data-lang="ru_RU">Milena</option>
+					<option value="Moira" data-lang="en_IE">Moira</option>
+					<option value="Monica" data-lang="es_ES">Monica</option>
+					<option value="Nora" data-lang="nb_NO">Nora</option>
+					<option value="Paulina" data-lang="es_MX">Paulina</option>
+					<option value="Petra" data-lang="de_DE">Petra</option>
+					<option value="Pipe Organ" data-lang="en_US">Pipe Organ</option>
+					<option value="Princess" data-lang="en_US">Princess</option>
+					<option value="Ralph" data-lang="en_US">Ralph</option>
+					<option value="Samantha" data-lang="en_US">Samantha</option>
+					<option value="Sara" data-lang="da_DK">Sara</option>
+					<option value="Satu" data-lang="fi_FI">Satu</option>
+					<option value="Sin-ji" data-lang="zh_HK">Sin-ji</option>
+					<option value="Tarik" data-lang="ar_SA">Tarik</option>
+					<option value="Tessa" data-lang="en_ZA">Tessa</option>
+					<option value="Thomas" data-lang="fr_FR">Thomas</option>
+					<option value="Ting-Ting" data-lang="zh_CN">Ting-Ting</option>
+					<option value="Trinoids" data-lang="en_US">Trinoids</option>
+					<option value="Veena" data-lang="en_IN">Veena</option>
+					<option value="Vicki" data-lang="en_US">Vicki</option>
+					<option value="Victoria" data-lang="en_US">Victoria</option>
+					<option value="Whisper" data-lang="en_US">Whisper</option>
+					<option value="Xander" data-lang="nl_NL">Xander</option>
+					<option value="Yannick" data-lang="de_DE">Yannick</option>
+					<option value="Yelda" data-lang="tr_TR">Yelda</option>
+					<option value="Yuna" data-lang="ko_KR">Yuna</option>
+					<option value="Zarvox" data-lang="en_US">Zarvox</option>
+					<option value="Zosia" data-lang="pl_PL">Zosia</option>
+					<option value="Zuzana" data-lang="cs_CZ">Zuzana</option>
 				</optgroup>
 			</select>
 	</div>

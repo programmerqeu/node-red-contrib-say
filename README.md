@@ -123,6 +123,12 @@ The editor dialog (`say.html`) exposes the following fields:
     - Named voices for **Linux** (Festival voices like `Alan`, `Nick`, `SLT`, …).
     - Named voices for **macOS** (e.g. `Alex`, `Bruce`, `Kathy`, `Vicki`, …).
 
+- **Language**
+  - Filters preset voices by locale (for example `de_DE`, `en_US`, `fr_FR`) on top of runtime OS filtering.
+  - Default can be `All languages`.
+  - The editor remembers the last selected language filter locally and restores it the next time you open the dialog.
+  - `Standard` and `Specify voice by string` remain available regardless of active language filter.
+
 - **Voice Name** (shown only when **Voice** is set to *Specify voice by string*)
   - Free‑form string passed to the underlying TTS engine as the voice name.
   - Use this when your platform has additional voices that are not listed in the dropdown.
