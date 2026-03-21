@@ -1,9 +1,5 @@
 # node-red-contrib-say
 
-## Translations
-
-This document is available in: [English](README.en.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md) · [Português](README.pt.md) · [Italiano](README.it.md) · [Nederlands](README.nl.md) · [Polski](README.pl.md) · [Türkçe](README.tr.md) · [Bahasa Indonesia](README.id.md).
-
 > Node-RED output node for text-to-speech (TTS).  
 > Let your runtime speak messages from your flows.
 
