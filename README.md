@@ -28,6 +28,17 @@ This makes it easy to:
 
 ---
 
+## Compatibility
+
+| | Version |
+| --- | --- |
+| **Supported Node-RED** | **4.x** (recommended; aligned with current Node-RED releases) |
+| **Node.js** | **18.x or newer** (CI tests **20** and **22** on Ubuntu and macOS) |
+
+Older Node-RED or Node.js versions may still work but are not covered by automated tests.
+
+---
+
 ## Requirements
 
 This node is a thin wrapper around the `say` package and relies on platform TTS tools:

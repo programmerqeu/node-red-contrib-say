@@ -32,6 +32,9 @@
     "url": "https://github.com/programmerqeu/node-red-contrib-say/issues"
   },
   "homepage": "https://github.com/programmerqeu/node-red-contrib-say",
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "say": "^0.16.0"
   },
