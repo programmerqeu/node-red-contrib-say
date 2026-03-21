@@ -70,56 +70,102 @@
 
           const applyVoicePresetFilter = function(runtimePlatform, languageFilter) {
             const $voiceSelect = $("#node-input-voice");
-            const $platformGroups = $voiceSelect.find("optgroup[data-platform]");
-            const $voiceOptions = $voiceSelect.find("optgroup[data-platform] option");
             const selectedValue = $voiceSelect.val();
             const normalizedLanguage = languageFilter || "__all__";
+            const originalVoiceMarkup = $voiceSelect.data("original-voice-markup");
+            const originalVoiceTemplate = $voiceSelect.data("original-voice-template");
+            if (!originalVoiceMarkup || !originalVoiceTemplate) {
+              return;
+            }
+            $voiceSelect.html(originalVoiceMarkup);
+            const $platformGroups = $voiceSelect.find("optgroup[data-platform]");
+            const $voiceOptions = $voiceSelect.find("optgroup[data-platform] option");
+            const getLanguageBase = function(languageCode) {
+              if (!languageCode || typeof languageCode !== "string") {
+                return undefined;
+              }
+              const normalized = languageCode.toLowerCase().replace("_", "-");
+              if (normalized === "en-scotland") {
+                return "en";
+              }
+              return normalized.split("-")[0];
+            };
 
-            if (!runtimePlatform) {
-              $platformGroups.show();
-            } else {
+            if (runtimePlatform) {
               $platformGroups.each(function() {
                 const $group = $(this);
                 const isMatch = $group.data("platform") === runtimePlatform;
-                $group.toggle(isMatch);
+                if (!isMatch) {
+                  $group.remove();
+                }
               });
             }
 
-            $voiceOptions.each(function() {
+            $voiceSelect.find("optgroup[data-platform] option").each(function() {
               const $option = $(this);
               const optionLang = $option.data("lang");
+              const optionBaseLanguage = getLanguageBase(optionLang);
               let visible = true;
-              if (normalizedLanguage !== "__all__" && optionLang) {
-                visible = optionLang === normalizedLanguage;
+              if (normalizedLanguage !== "__all__" && optionBaseLanguage) {
+                visible = optionBaseLanguage === normalizedLanguage;
               }
-              $option.toggle(visible);
+              if (!visible) {
+                $option.remove();
+              }
             });
 
-            $platformGroups.each(function() {
+            $voiceSelect.find("optgroup[data-platform]").each(function() {
               const $group = $(this);
-              if ($group.css("display") === "none") {
-                return;
+              if ($group.find("option").length === 0) {
+                $group.remove();
               }
-              const hasVisibleOptions = $group.find("option:visible").length > 0;
-              $group.toggle(hasVisibleOptions);
             });
 
             // Keep an already-selected preset visible for backwards compatibility.
-            const $selectedOption = $voiceSelect.find('option[value="' + selectedValue + '"]');
-            if ($selectedOption.length > 0) {
-              $selectedOption.show();
-              $selectedOption.closest("optgroup[data-platform]").show();
+            if (selectedValue) {
+              const $selectedOption = $voiceSelect.find('option[value="' + selectedValue + '"]');
+              if ($selectedOption.length === 0) {
+                const $originalSelect = originalVoiceTemplate.clone();
+                const $originalSelectedOption = $originalSelect.find('option[value="' + selectedValue + '"]');
+                if ($originalSelectedOption.length > 0) {
+                  const $originalGroup = $originalSelectedOption.closest("optgroup[data-platform]");
+                  if ($originalGroup.length > 0) {
+                    const groupPlatform = $originalGroup.data("platform");
+                    let $targetGroup = $voiceSelect.find('optgroup[data-platform="' + groupPlatform + '"]');
+                    if ($targetGroup.length === 0) {
+                      $targetGroup = $originalGroup.clone().empty();
+                      $voiceSelect.append($targetGroup);
+                    }
+                    $targetGroup.append($originalSelectedOption.clone());
+                  } else {
+                    $voiceSelect.append($originalSelectedOption.clone());
+                  }
+                }
+              }
             }
+
+            $voiceSelect.val(selectedValue);
           };
 
           const collectLanguages = function() {
             const seen = {};
             const values = [];
+            const getLanguageBase = function(languageCode) {
+              if (!languageCode || typeof languageCode !== "string") {
+                return undefined;
+              }
+              const normalized = languageCode.toLowerCase().replace("_", "-");
+              if (normalized === "en-scotland") {
+                return "en";
+              }
+              return normalized.split("-")[0];
+            };
             $("#node-input-voice").find("option[data-lang]").each(function() {
               const language = $(this).data("lang");
-              if (language && !seen[language]) {
-                seen[language] = true;
-                values.push(language);
+              const baseLanguage = getLanguageBase(language);
+              if (baseLanguage && !seen[baseLanguage]) {
+                seen[baseLanguage] = true;
+                values.push(baseLanguage);
               }
             });
             values.sort();
@@ -129,13 +175,39 @@
           const populateLanguageFilter = function(defaultLanguage) {
             const $languageSelect = $("#node-input-languageFilter");
             const languages = collectLanguages();
+            const editorLocale =
+              (RED && RED.i18n && typeof RED.i18n.lang === "function" && RED.i18n.lang()) ||
+              (RED && RED.settings && (RED.settings.lang || RED.settings.language)) ||
+              (navigator && (navigator.language || (navigator.languages && navigator.languages[0]))) ||
+              "en";
+            const uiLocale = String(editorLocale).replace("_", "-");
+
+            const getLanguageLabel = function(languageCode) {
+              if (!languageCode) {
+                return "";
+              }
+              const normalizedCode = String(languageCode).toLowerCase().replace("_", "-");
+              try {
+                if (typeof Intl !== "undefined" && Intl.DisplayNames) {
+                  const languageNames = new Intl.DisplayNames([uiLocale], { type: "language" });
+                  const languageName = languageNames.of(normalizedCode);
+                  if (languageName) {
+                    return languageName;
+                  }
+                }
+              } catch (_error) { }
+              return languageCode;
+            };
+
             $languageSelect.empty();
             $languageSelect.append(
               $('<option value="__all__" data-i18n="say.language.all"></option>')
             );
             languages.forEach(function(language) {
               $languageSelect.append(
-                $('<option></option>').attr("value", language).text(language)
+                $('<option></option>')
+                  .attr("value", language)
+                  .text(getLanguageLabel(language))
               );
             });
             if (languages.includes(defaultLanguage)) {
@@ -143,12 +215,16 @@
             } else {
               $languageSelect.val("__all__");
             }
-            RED.i18n.update($languageSelect);
+            if (RED && RED.i18n && typeof RED.i18n.update === "function") {
+              RED.i18n.update($languageSelect);
+            }
           };
 
           let currentRuntimePlatform = detectRuntimePlatform();
           const preferredLanguage = getPreferredLanguage();
           populateLanguageFilter(preferredLanguage);
+          $("#node-input-voice").data("original-voice-markup", $("#node-input-voice").html());
+          $("#node-input-voice").data("original-voice-template", $("#node-input-voice").clone());
           applyVoicePresetFilter(currentRuntimePlatform, preferredLanguage);
 
           $.getJSON("say/platform")

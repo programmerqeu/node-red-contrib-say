@@ -4,9 +4,13 @@
     "label": {
       "name": "名称",
       "text": "文本",
+      "language": "语言",
       "voice": "语音",
       "voiceName": "语音名称",
       "speed": "语速"
+    },
+    "language": {
+      "all": "所有语言"
     },
     "placeholder": {
       "name": "名称",

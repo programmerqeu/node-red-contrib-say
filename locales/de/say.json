@@ -4,9 +4,13 @@
     "label": {
       "name": "Name",
       "text": "Text",
+      "language": "Sprache",
       "voice": "Stimme",
       "voiceName": "Stimmenname",
       "speed": "Geschwindigkeit"
+    },
+    "language": {
+      "all": "Alle Sprachen"
     },
     "placeholder": {
       "name": "Name",

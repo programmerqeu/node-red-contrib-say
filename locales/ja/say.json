@@ -4,9 +4,13 @@
     "label": {
       "name": "名前",
       "text": "テキスト",
+      "language": "言語",
       "voice": "音声",
       "voiceName": "音声名",
       "speed": "速度"
+    },
+    "language": {
+      "all": "すべての言語"
     },
     "placeholder": {
       "name": "名前",

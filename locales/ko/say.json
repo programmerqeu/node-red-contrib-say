@@ -4,9 +4,13 @@
     "label": {
       "name": "이름",
       "text": "텍스트",
+      "language": "언어",
       "voice": "음성",
       "voiceName": "음성 이름",
       "speed": "속도"
+    },
+    "language": {
+      "all": "모든 언어"
     },
     "placeholder": {
       "name": "이름",
