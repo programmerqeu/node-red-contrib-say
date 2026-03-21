@@ -19,7 +19,7 @@
     },
     "voice": {
       "standard": "Standard",
-      "byString": "Stimme als Text angeben",
+      "byString": "Stimmenname manuell",
       "alan": "Alan — schottisch, männlich",
       "nick": "Nick — Englisch, männlich",
       "roger": "Roger — Englisch, männlich",

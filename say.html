@@ -17,6 +17,7 @@
 			return this.name || this.text || this._('say.paletteLabel');
 		},
 		oneditprepare: function() {
+          const t = (typeof this._ === "function") ? this._.bind(this) : function(key) { return key; };
           const languageStorageKey = "node-red-contrib-say.languageFilter";
           const normalizePlatform = function(platform) {
             if (!platform || typeof platform !== "string") {
@@ -30,6 +31,16 @@
               return "linux";
             }
             return undefined;
+          };
+
+          const getI18nText = function(key, fallbackText) {
+            try {
+              const translated = t(key);
+              if (translated && translated !== key) {
+                return translated;
+              }
+            } catch (_error) { }
+            return fallbackText;
           };
 
           const detectRuntimePlatform = function() {
@@ -78,6 +89,10 @@
               return;
             }
             $voiceSelect.html(originalVoiceMarkup);
+            $voiceSelect.find('option[data-i18n="say.voice.standard"]')
+              .text(getI18nText("say.voice.standard", "Standard"));
+            $voiceSelect.find('option[data-i18n="say.voice.byString"]')
+              .text(getI18nText("say.voice.byString", "Specify voice by string"));
             const $platformGroups = $voiceSelect.find("optgroup[data-platform]");
             const $voiceOptions = $voiceSelect.find("optgroup[data-platform] option");
             const getLanguageBase = function(languageCode) {
@@ -201,7 +216,7 @@
 
             $languageSelect.empty();
             $languageSelect.append(
-              $('<option value="__all__" data-i18n="say.language.all"></option>')
+              $('<option value="__all__"></option>').text(getI18nText("say.language.all", "All languages"))
             );
             languages.forEach(function(language) {
               $languageSelect.append(
@@ -214,9 +229,6 @@
               $languageSelect.val(defaultLanguage);
             } else {
               $languageSelect.val("__all__");
-            }
-            if (RED && RED.i18n && typeof RED.i18n.update === "function") {
-              RED.i18n.update($languageSelect);
             }
           };
 
@@ -268,14 +280,14 @@
 	<div class="form-row">
 		<label for="node-input-languageFilter"><i class="icon-tag"></i> <span data-i18n="say.label.language"></span></label>
 		<select type="text" id="node-input-languageFilter" style="width: 320px">
-			<option value="__all__" data-i18n="say.language.all"></option>
+			<option value="__all__" data-i18n="say.language.all">All languages</option>
 		</select>
 	</div>
 	<div class="form-row">
 			<label for="node-input-voice"><i class="icon-user"></i> <span data-i18n="say.label.voice"></span></label>
 			<select type="text" id="node-input-voice" style="width: 320px">
-				<option value="" style="font-style: italic" data-i18n="say.voice.standard"></option>
-				<option value=":" style="font-style: italic" data-i18n="say.voice.byString"></option>
+				<option value="" style="font-style: italic" data-i18n="say.voice.standard">Standard</option>
+				<option value=":" style="font-style: italic" data-i18n="say.voice.byString">Specify voice by string</option>
 				<optgroup label="Linux" data-i18n="[label]say.optgroup.linux" data-platform="linux">
 					<option value="Alan" data-lang="en_US" data-i18n="say.voice.alan"></option>
 					<option value="Nick" data-lang="en_US" data-i18n="say.voice.nick"></option>
