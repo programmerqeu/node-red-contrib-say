@@ -63,14 +63,17 @@ module.exports = function (RED) {
 		const voice = config.voice !== ':' ? config.voice : config.voiceString;
 
 		this.on('input', function (msg) {
+			node.status({ fill: 'blue', shape: 'dot' });
 			say.speak(
 				resolveSpeakText(config, msg),
 				voice,
 				config.speed ? Number(config.speed) : 1,
 				function (err) {
 					if (err) {
+						node.status({});
 						return node.error(err);
 					}
+					node.status({});
 					node.send(msg);
 			});
 		});

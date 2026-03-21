@@ -47,8 +47,12 @@ describe('Say node', { concurrency: 1 }, () => {
 			send: (msg) => {
 				node._lastSent = msg;
 			},
+			status: (status) => {
+				node._statuses.push(status);
+			},
 			_lastError: null,
 			_lastSent: null,
+			_statuses: [],
 			_inputHandler: null,
 		};
 		SayNodeConstructor.call(node, config);
@@ -199,6 +203,17 @@ describe('Say node', { concurrency: 1 }, () => {
 				done();
 			});
 		});
+
+		it('sets speaking status during speech and clears it after completion', (t, done) => {
+			const node = createNode({});
+			node._inputHandler({ payload: 'hello' });
+			setImmediate(() => {
+				assert.ok(node._statuses.length >= 2);
+				assert.deepStrictEqual(node._statuses[0], { fill: 'blue', shape: 'dot' });
+				assert.deepStrictEqual(node._statuses[node._statuses.length - 1], {});
+				done();
+			});
+		});
 	});
 
 	describe('error path', () => {
@@ -210,6 +225,9 @@ describe('Say node', { concurrency: 1 }, () => {
 				try {
 					assert.ok(node._lastError);
 					assert.strictEqual(node._lastSent, null);
+					assert.ok(node._statuses.length >= 2);
+					assert.deepStrictEqual(node._statuses[0], { fill: 'blue', shape: 'dot' });
+					assert.deepStrictEqual(node._statuses[node._statuses.length - 1], {});
 					done();
 				} finally {
 					global.__SAY_MOCK_FAIL = false;
