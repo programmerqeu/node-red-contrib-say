@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.3.0](https://github.com/programmerqeu/node-red-contrib-say/compare/node-red-contrib-say-v0.2.1...node-red-contrib-say-v0.3.0) (2026-03-21)
+
+
+### Features
+
+* add language filter to voice selection in editor ([928f52c](https://github.com/programmerqeu/node-red-contrib-say/commit/928f52ca94a44909235c6d3e6b413b986051bc1a))
+* Add translations to  files for multilingual support ([06488c6](https://github.com/programmerqeu/node-red-contrib-say/commit/06488c629a0f1f5d6a2a26be9778e3f9e10e2b1e))
+* enhance localization and voice options in say.html and German translations ([ee3980f](https://github.com/programmerqeu/node-red-contrib-say/commit/ee3980f5a7e46d295a7a73d506a81d3681523233))
+* enhance status management during speech in say.js ([752f426](https://github.com/programmerqeu/node-red-contrib-say/commit/752f426a040ee81a226358d8295798db12af39ba))
+* enhance voice selection and localization support in say.html and language files ([c7105ef](https://github.com/programmerqeu/node-red-contrib-say/commit/c7105efac0095e28eff0b70771e5343903c5986b))
+* enhance voice selection in editor with runtime OS detection ([c769f0b](https://github.com/programmerqeu/node-red-contrib-say/commit/c769f0b6a7e265c17726cc0d5b018ea73c6880c9))
+* improve platform docs, i18n help, and payload string coercion ([f2cc7cb](https://github.com/programmerqeu/node-red-contrib-say/commit/f2cc7cb25eea6e7aeff0eccee730a5488b491292))
+
+
+### Bug Fixes
+
+* update label function in say.html for improved localization support ([255b364](https://github.com/programmerqeu/node-red-contrib-say/commit/255b364a1c979a2b3c1fe13bf00fb4ffa87ab493))
+
 ## [0.2.1](https://github.com/programmerqeu/node-red-contrib-say/compare/node-red-contrib-say-v0.2.0...node-red-contrib-say-v0.2.1) (2026-03-17)
 
 
