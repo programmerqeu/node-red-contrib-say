@@ -114,6 +114,9 @@ The editor dialog (`say.html`) exposes the following fields:
 
 - **Voice**
   - Dropdown of available built‑in voices for your platform. The presets refer to the **Node-RED runtime** OS (Linux vs macOS), not necessarily the computer where you edit the flow.
+  - The editor automatically hides non-matching preset groups when the runtime OS can be detected.
+  - If runtime OS detection is unavailable, all preset groups remain visible as a safe fallback.
+  - If a flow already uses a preset from another OS, that selected preset stays visible in the editor for compatibility.
   - Options:
     - `Standard` (empty value): use the default system voice.
     - `Specify voice by string (:)`: enables **Voice Name**.

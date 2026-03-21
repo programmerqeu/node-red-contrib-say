@@ -14,9 +14,19 @@ module.exports = function (RED) {
 	'use strict';
 
 	const path = require('path');
+	const runtimePlatform = process.platform;
 	const say = process.env.SAY_TEST_MODULE
 		? require(path.resolve(__dirname, process.env.SAY_TEST_MODULE))
 		: require('say');
+
+	if (RED.httpAdmin && typeof RED.httpAdmin.get === 'function') {
+		const allowRead = RED.auth && typeof RED.auth.needsPermission === 'function'
+			? RED.auth.needsPermission('flows.read')
+			: function (_req, _res, next) { next(); };
+		RED.httpAdmin.get('/say/platform', allowRead, function (_req, res) {
+			res.json({ platform: runtimePlatform });
+		});
+	}
 
 	/**
 	 * Text to speak: same priority as config.text || config.name || msg.payload,

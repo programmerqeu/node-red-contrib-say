@@ -17,6 +17,76 @@
 			return this.name || this.text || this._('paletteLabel');
 		},
 		oneditprepare: function() {
+          const normalizePlatform = function(platform) {
+            if (!platform || typeof platform !== "string") {
+              return undefined;
+            }
+            const value = platform.toLowerCase();
+            if (value === "darwin" || value === "macos" || value === "mac") {
+              return "darwin";
+            }
+            if (value === "linux") {
+              return "linux";
+            }
+            return undefined;
+          };
+
+          const detectRuntimePlatform = function() {
+            const settings = RED && RED.settings ? RED.settings : {};
+            const candidates = [
+              settings.runtimeOS,
+              settings.runtimePlatform,
+              settings.platform,
+              settings.os,
+              settings.runtime && settings.runtime.os,
+              settings.runtime && settings.runtime.platform,
+              settings.env && settings.env.os,
+              settings.env && settings.env.platform
+            ];
+
+            for (let i = 0; i < candidates.length; i += 1) {
+              const normalized = normalizePlatform(candidates[i]);
+              if (normalized) {
+                return normalized;
+              }
+            }
+            return undefined;
+          };
+
+          const applyVoicePresetFilter = function(runtimePlatform) {
+            const $voiceSelect = $("#node-input-voice");
+            const $groups = $voiceSelect.find("optgroup[data-platform]");
+
+            if (!runtimePlatform) {
+              $groups.show();
+              return;
+            }
+
+            $groups.each(function() {
+              const $group = $(this);
+              const isMatch = $group.data("platform") === runtimePlatform;
+              $group.toggle(isMatch);
+            });
+
+            // Keep an already-selected custom preset visible for backwards compatibility.
+            const selectedValue = $voiceSelect.val();
+            const $selectedOption = $voiceSelect.find('option[value="' + selectedValue + '"]');
+            if ($selectedOption.length > 0) {
+              $selectedOption.closest("optgroup[data-platform]").show();
+            }
+          };
+
+          const settingsPlatform = detectRuntimePlatform();
+          applyVoicePresetFilter(settingsPlatform);
+
+          $.getJSON("say/platform")
+            .done(function(response) {
+              const apiPlatform = normalizePlatform(response && response.platform);
+              if (apiPlatform) {
+                applyVoicePresetFilter(apiPlatform);
+              }
+            });
+
           $("#node-input-voice").on("change", function(){
             let option = $("#node-input-voice").val();
             if(option == ":"){
@@ -45,7 +115,7 @@
 			<select type="text" id="node-input-voice" style="width: 320px">
 				<option value="" style="font-style: italic" data-i18n="say.voice.standard"></option>
 				<option value=":" style="font-style: italic" data-i18n="say.voice.byString"></option>
-				<optgroup label="Linux" data-i18n="[label]say.optgroup.linux">
+				<optgroup label="Linux" data-i18n="[label]say.optgroup.linux" data-platform="linux">
 					<option value="Alan" data-i18n="say.voice.alan"></option>
 					<option value="Nick" data-i18n="say.voice.nick"></option>
 					<option value="Roger" data-i18n="say.voice.roger"></option>
@@ -53,7 +123,7 @@
 					<option value="KAL" data-i18n="say.voice.kal"></option>
 					<option value="SLT" data-i18n="say.voice.slt"></option>
 				</optgroup>
-				<optgroup label="macOS" data-i18n="[label]say.optgroup.macos">
+				<optgroup label="macOS" data-i18n="[label]say.optgroup.macos" data-platform="darwin">
 					<option value="Alex">Alex</option>
 					<option value="Bruce">Bruce</option>
 					<option value="Fred">Fred</option>
