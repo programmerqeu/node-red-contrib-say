@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/programmerqeu/node-red-contrib-say/compare/node-red-contrib-say-v0.3.0...node-red-contrib-say-v0.4.0) (2026-03-21)
+
+
+### Features
+
+* specify Node.js engine requirement and add compatibility section to README.md ([81b73c6](https://github.com/programmerqeu/node-red-contrib-say/commit/81b73c6c1468aaaf3b53191df2e8d748066d08ac))
+
 ## [0.3.0](https://github.com/programmerqeu/node-red-contrib-say/compare/node-red-contrib-say-v0.2.1...node-red-contrib-say-v0.3.0) (2026-03-21)
 
 
