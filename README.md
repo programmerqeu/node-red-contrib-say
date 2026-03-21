@@ -39,14 +39,19 @@ This node is a thin wrapper around the `say` package and relies on platform TTS 
 - **macOS**
   - Uses the built-in `say` command.
   - No extra setup required in a default macOS install.
+  - To list voices available on **that** machine, run in a terminal: `say -v '?'` (voices can differ by macOS version and installed language packs).
 
 - **Linux**
-  - Uses [Festival](http://www.cstr.ed.ac.uk/projects/festival/) or a compatible TTS engine available on the command line.
+  - The underlying [`say`](https://www.npmjs.com/package/say) package uses **[Festival](http://www.cstr.ed.ac.uk/projects/festival/) only** (for example `espeak-ng` is not used).
   - Install Festival using your package manager (for example on Debian/Ubuntu):
 
     ```bash
     sudo apt-get install festival
     ```
+
+  - You also need a working audio stack on the host (for example ALSA, PulseAudio, or PipeWire) so Festival can play sound. Minimal or headless servers may need extra configuration or audio devices mapped into the environment.
+
+  - **Docker and containers:** Base images often omit Festival and may not expose sound devices. Install Festival inside the image, install/configure audio, and pass through devices or use a suitable remote audio setup—otherwise the node cannot produce audible output.
 
 - **Windows**
   - Uses a native PowerShell call to `SAPI.SpVoice`.
@@ -112,7 +117,7 @@ The editor dialog (`say.html`) exposes the following fields:
   - Leave empty if you want to drive the spoken text entirely via `msg.payload`.
 
 - **Voice**
-  - Dropdown of available built‑in voices for your platform.
+  - Dropdown of available built‑in voices for your platform. The presets refer to the **Node-RED runtime** OS (Linux vs macOS), not necessarily the computer where you edit the flow.
   - Options:
     - `Standard` (empty value): use the default system voice.
     - `Specify voice by string (:)`: enables **Voice Name**.

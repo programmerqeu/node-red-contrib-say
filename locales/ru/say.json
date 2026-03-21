@@ -26,6 +26,18 @@
     "optgroup": {
       "linux": "Linux",
       "macos": "macOS"
+    },
+    "hint": {
+      "voiceRuntime": "Предустановки голосов относятся к ОС среды выполнения Node-RED (Linux или macOS), а не обязательно к компьютеру, где открыт этот редактор."
+    },
+    "help": {
+      "intro": "Озвучивает текст из полей «Текст» или «Имя», либо из msg.payload, если они пусты.",
+      "requirementsTitle": "Требования",
+      "macos": "macOS — использует встроенную команду say; без дополнительной настройки в стандартной установке.",
+      "linux": "Linux — установите Festival (например apt install festival) и проверьте вывод звука.",
+      "linuxEngine": "В Linux пакет npm say поддерживает только Festival; движки вроде espeak-ng не используются.",
+      "windows": "Windows — использует SAPI через PowerShell; работает в стандартной Windows с PowerShell.",
+      "macosVoices": "В macOS список голосов на среде выполнения: say -v ?"
     }
   }
 }

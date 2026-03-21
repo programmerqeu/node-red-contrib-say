@@ -26,6 +26,18 @@
     "optgroup": {
       "linux": "Linux",
       "macos": "macOS"
+    },
+    "hint": {
+      "voiceRuntime": "Le voci suggerite si riferiscono all’OS della runtime Node-RED (Linux o macOS), non necessariamente al computer su cui gira questo editor."
+    },
+    "help": {
+      "intro": "Legge il testo dai campi Testo o Nome, oppure da msg.payload se sono vuoti.",
+      "requirementsTitle": "Requisiti",
+      "macos": "macOS — usa il comando say integrato; nessuna configurazione extra su installazione standard.",
+      "linux": "Linux — installa Festival (es. apt install festival) e verifica l’uscita audio.",
+      "linuxEngine": "Su Linux il pacchetto npm say supporta solo Festival; motori come espeak-ng non sono usati.",
+      "windows": "Windows — usa SAPI di PowerShell; funziona su Windows standard con PowerShell.",
+      "macosVoices": "Su macOS, elenca le voci sulla runtime con: say -v ?"
     }
   }
 }

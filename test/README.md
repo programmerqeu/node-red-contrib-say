@@ -21,7 +21,7 @@ SAY_TEST_MODULE=test/mocks/say.js node --test test/say.test.js
 ## What is tested
 
 - **Node registration**: Type `say` is registered with RED and `createNode` is called with config.
-- **Text / payload priority**: `config.text` > `config.name` > `msg.payload`.
+- **Text / payload priority**: `config.text` > `config.name` > `msg.payload` (payload is passed through `String()`; numeric `0` and boolean `false` are not skipped).
 - **Voice selection**: `config.voice` when not `":"`, else `config.voiceString`.
 - **Speed**: `config.speed` (number or string), default `1`.
 - **Success path**: `node.send(msg)` after `say.speak` succeeds.

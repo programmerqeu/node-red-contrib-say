@@ -26,6 +26,18 @@
     "optgroup": {
       "linux": "Linux",
       "macos": "macOS"
+    },
+    "hint": {
+      "voiceRuntime": "Voice presets apply to your Node-RED runtime OS (Linux vs macOS), not necessarily the machine running this editor."
+    },
+    "help": {
+      "intro": "Speaks text from the node's Text or Name field, or from msg.payload when those are empty.",
+      "requirementsTitle": "Requirements",
+      "macos": "macOS — uses the built-in say command; no extra setup on a default install.",
+      "linux": "Linux — install Festival (for example apt install festival) and ensure audio output works.",
+      "linuxEngine": "On Linux, only Festival is supported by the npm say package; engines such as espeak-ng are not used.",
+      "windows": "Windows — uses PowerShell SAPI; works on standard Windows with PowerShell.",
+      "macosVoices": "On macOS, list available voices on the runtime with: say -v ?"
     }
   }
 }

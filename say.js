@@ -19,6 +19,28 @@ module.exports = function (RED) {
 		: require('say');
 
 	/**
+	 * Text to speak: same priority as config.text || config.name || msg.payload,
+	 * but msg.payload 0 (and false) are preserved instead of being skipped by ||.
+	 *
+	 * @param {*} config
+	 * @param {*} msg
+	 * @return {string}
+	 */
+	function resolveSpeakText(config, msg) {
+		let raw = config.text;
+		if (raw === undefined || raw === null || raw === '') {
+			raw = config.name;
+		}
+		if (raw === undefined || raw === null || raw === '') {
+			raw = msg.payload;
+		}
+		if (raw === undefined || raw === null || raw === '') {
+			return '';
+		}
+		return String(raw);
+	}
+
+	/**
 	 * Say node
 	 *
 	 * @property {*} config Configuration object
@@ -32,7 +54,7 @@ module.exports = function (RED) {
 
 		this.on('input', function (msg) {
 			say.speak(
-				config.text || config.name || msg.payload,
+				resolveSpeakText(config, msg),
 				voice,
 				config.speed ? Number(config.speed) : 1,
 				function (err) {

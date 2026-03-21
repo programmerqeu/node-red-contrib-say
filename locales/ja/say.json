@@ -26,6 +26,18 @@
     "optgroup": {
       "linux": "Linux",
       "macos": "macOS"
+    },
+    "hint": {
+      "voiceRuntime": "音声プリセットは Node-RED ランタイムの OS（Linux か macOS）向けで、このエディターを開いている PC と一致しない場合があります。"
+    },
+    "help": {
+      "intro": "「テキスト」または「名前」、空のときは msg.payload を読み上げます。",
+      "requirementsTitle": "要件",
+      "macos": "macOS — 組み込みの say コマンドを使用。標準インストールなら追加設定は不要。",
+      "linux": "Linux — Festival をインストール（例: apt install festival）し、音声出力を確認してください。",
+      "linuxEngine": "Linux では npm の say が Festival のみ対応。espeak-ng などは使われません。",
+      "windows": "Windows — PowerShell の SAPI を使用。標準の Windows と PowerShell で動作。",
+      "macosVoices": "macOS ではランタイム上で say -v ? と実行すると利用可能な音声を一覧できます。"
     }
   }
 }

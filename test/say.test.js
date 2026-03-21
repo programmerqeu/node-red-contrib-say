@@ -102,6 +102,24 @@ describe('Say node', { concurrency: 1 }, () => {
 			});
 		});
 
+		it('speaks msg.payload 0 as the string "0"', (t, done) => {
+			const node = createNode({ text: '', name: '' });
+			node._inputHandler({ payload: 0 });
+			setImmediate(() => {
+				assert.strictEqual(mockSay.getLastCall().text, '0');
+				done();
+			});
+		});
+
+		it('speaks msg.payload false as the string "false"', (t, done) => {
+			const node = createNode({ text: '', name: '' });
+			node._inputHandler({ payload: false });
+			setImmediate(() => {
+				assert.strictEqual(mockSay.getLastCall().text, 'false');
+				done();
+			});
+		});
+
 		it('uses msg.payload when config has no text or name', (t, done) => {
 			const node = createNode({});
 			node._inputHandler({ payload: 'Only payload' });

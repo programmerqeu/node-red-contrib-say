@@ -24,6 +24,8 @@ If you are developing this node locally:
 
   See [`test/README.md`](test/README.md) for more details.
 
+- CI runs `pnpm lint` and `pnpm test` on **Ubuntu** and **macOS** (see [`.github/workflows/ci.yml`](.github/workflows/ci.yml)).
+
 > The tests do **not** trigger real audio. They use `SAY_TEST_MODULE` to inject a mock `say` module from `test/mocks/say.js`.
 
 ## Local Node-RED development

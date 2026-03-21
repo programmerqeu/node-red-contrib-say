@@ -26,6 +26,18 @@
     "optgroup": {
       "linux": "Linux",
       "macos": "macOS"
+    },
+    "hint": {
+      "voiceRuntime": "语音预设对应 Node-RED 运行时的操作系统（Linux 或 macOS），不一定对应当前打开编辑器的电脑。"
+    },
+    "help": {
+      "intro": "朗读「文本」或「名称」字段的内容；若为空则使用 msg.payload。",
+      "requirementsTitle": "环境要求",
+      "macos": "macOS — 使用内置 say 命令；默认安装无需额外配置。",
+      "linux": "Linux — 请安装 Festival（例如 apt install festival）并确保音频输出正常。",
+      "linuxEngine": "在 Linux 上，npm say 包仅支持 Festival；不会使用 espeak-ng 等引擎。",
+      "windows": "Windows — 通过 PowerShell SAPI；在带 PowerShell 的标准 Windows 上可用。",
+      "macosVoices": "在 macOS 上，可在运行时终端执行 say -v ? 列出可用语音。"
     }
   }
 }
