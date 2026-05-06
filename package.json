@@ -2,7 +2,7 @@
   "name": "node-red-contrib-say",
   "version": "0.4.0",
   "description": "Output node for node-red for TTS (text to speech). Requires preinstall TTS program on command line.",
-  "packageManager": "pnpm@10.33.0",
+  "packageManager": "pnpm@10.33.4",
   "main": "say.js",
   "scripts": {
     "test": "SAY_TEST_MODULE=test/mocks/say.js node --test test/say.test.js",
